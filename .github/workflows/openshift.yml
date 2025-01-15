@@ -130,19 +130,6 @@ jobs:
         oc expose deploy hello --port 8080
         oc create route edge hello --service=hello --insecure-policy=Redirect
 
-    - name: Print application URL
-      env:
-        ROUTE: ${{ steps.deploy-and-expose.outputs.route }}
-        SELECTOR: ${{ steps.deploy-and-expose.outputs.selector }}
-      run: |
-        [[ -n ${{ env.ROUTE }} ]] || (echo "Determining application route failed in previous step"; exit 1)
-        echo
-        echo "======================== Your application is available at: ========================"
-        echo ${{ env.ROUTE }}
-        echo "==================================================================================="
-        echo
-        echo "Your app can be taken down with: \"oc delete all --selector='${{ env.SELECTOR }}'\""
-
   on-prem-deploy:
     name: On-Prem Deployment
     if: ${{ vars.ONPREM_LIVE == 'true' }}

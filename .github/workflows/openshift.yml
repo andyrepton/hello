@@ -126,7 +126,7 @@ jobs:
         oc delete buildconfig hello || echo "Build Config doesn't exist"
         oc delete service hello || echo "Service doesn't exist"
         oc delete route hello || echo "Route doesn't exists"
-        oc new-app golang~https://github.com/andyrepton/hello --env=CLOUD_REGION=germany --env=OPENSHIFT_TYPE=OCP --env=CLOUD_TYPE=On-Prem
+        oc new-app golang~https://github.com/andyrepton/hello --env=CLOUD_REGION=eu-west-1 --env=OPENSHIFT_TYPE=ROSA --env=CLOUD_TYPE=AWS
         oc expose deploy hello --port 8080
         oc create route edge hello --service=hello --insecure-policy=Redirect
         oc get route hello
